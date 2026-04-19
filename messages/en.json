@@ -1,0 +1,86 @@
+{
+  "Landing": {
+    "title": "Party Game",
+    "subtitle": "Mini games to play with friends",
+    "selectLanguage": "Select your language",
+    "start": "Let's Play!"
+  },
+  "Lobby": {
+    "title": "Choose a Game",
+    "subtitle": "Pick your game and have fun!",
+    "players": "players",
+    "play": "Play",
+    "alligator": {
+      "name": "Alligator Teeth",
+      "description": "Press teeth one by one! Hit the wrong one and get a penalty!"
+    },
+    "bomb": {
+      "name": "Pass the Bomb",
+      "description": "Pass the bomb before it explodes!"
+    },
+    "pirate": {
+      "name": "Pirate Roulette",
+      "description": "Stab the barrel! Get stabbed, get penalized!"
+    },
+    "touch": {
+      "name": "Touch Roulette",
+      "description": "Put your finger on screen! The red one gets penalized!"
+    }
+  },
+  "Penalty": {
+    "title": "PENALTY!",
+    "subtitle": "You got caught!",
+    "playAgain": "Play Again",
+    "backToLobby": "Back to Lobby"
+  },
+  "Common": {
+    "back": "Back",
+    "about": "About",
+    "terms": "Terms",
+    "privacy": "Privacy"
+  },
+  "About": {
+    "title": "About Party Game",
+    "description": "Party Game is a free mobile mini-game web app you can enjoy with friends using just one smartphone. Designed to be intuitive for everyone at parties, bars, and gatherings.",
+    "featuresTitle": "Games",
+    "feature1": "Alligator Teeth: Random penalty tooth pressing game",
+    "feature2": "Pass the Bomb: Random timer bomb passing game",
+    "feature3": "Pirate Roulette: Barrel-stabbing penalty game",
+    "feature4": "Touch Roulette: Multi-touch random penalty selector",
+    "supportTitle": "Supported Languages",
+    "support": "Korean, English, Vietnamese, Thai, Lao",
+    "contactTitle": "Contact",
+    "contact": "For inquiries, please reach us by email.",
+    "email": "tjgksdnf3275@gmail.com"
+  },
+  "Terms": {
+    "title": "Terms of Service",
+    "updated": "Last updated: April 19, 2026",
+    "s1title": "1. Acceptance of Terms",
+    "s1": "By accessing or using Party Game (the 'Service'), you agree to be bound by these Terms of Service. If you do not agree, please do not use the Service.",
+    "s2title": "2. Description of Service",
+    "s2": "The Service provides free mobile mini-games including Alligator Teeth, Pass the Bomb, Pirate Roulette, and Touch Roulette, playable by multiple people sharing one device.",
+    "s3title": "3. User Conduct",
+    "s3": "You agree to use the Service only for lawful purposes and in a manner that does not infringe the rights of others.",
+    "s4title": "4. Advertising",
+    "s4": "The Service may display third-party advertisements to support operations. The advertiser is solely responsible for the content of their ads.",
+    "s5title": "5. Disclaimer",
+    "s5": "The Service is provided 'as is' without warranties of any kind. We are not liable for any damages resulting from use of the Service.",
+    "s6title": "6. Changes to Terms",
+    "s6": "We reserve the right to modify these terms at any time. Continued use of the Service constitutes acceptance of the updated terms."
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "updated": "Last updated: April 19, 2026",
+    "intro": "Party Game takes your privacy seriously. This policy explains how we handle information when you use our Service.",
+    "s1title": "1. Information We Collect",
+    "s1": "The Service does not require registration and does not directly collect personal information. However, our advertising partners (Google AdSense, Kakao AdFit) may collect cookies and anonymous usage data to serve relevant ads.",
+    "s2title": "2. Cookies and Advertising",
+    "s2": "We use Google AdSense to display advertisements. Google uses cookies to serve ads based on your prior visits. You may opt out of personalized advertising by visiting https://adssettings.google.com.",
+    "s3title": "3. Third-Party Sharing",
+    "s3": "We do not sell or share your personal information with third parties, except as required by our advertising partners who operate under their own privacy policies.",
+    "s4title": "4. Contact",
+    "s4": "For privacy-related inquiries, please contact us at:",
+    "email": "tjgksdnf3275@gmail.com"
+  }
+}

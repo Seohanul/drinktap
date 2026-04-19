@@ -1,0 +1,86 @@
+{
+  "Landing": {
+    "title": "Party Game",
+    "subtitle": "Trò chơi mini cùng bạn bè",
+    "selectLanguage": "Chọn ngôn ngữ",
+    "start": "Bắt đầu!"
+  },
+  "Lobby": {
+    "title": "Chọn Trò Chơi",
+    "subtitle": "Chọn trò chơi và vui chơi nào!",
+    "players": "người chơi",
+    "play": "Chơi",
+    "alligator": {
+      "name": "Hàm Cá Sấu",
+      "description": "Nhấn từng chiếc răng! Nhấn nhầm sẽ bị phạt!"
+    },
+    "bomb": {
+      "name": "Chuyền Bom",
+      "description": "Chuyền quả bom trước khi nó nổ!"
+    },
+    "pirate": {
+      "name": "Roulette Cướp Biển",
+      "description": "Đâm kiếm vào thùng! Bị phun ra thì bị phạt!"
+    },
+    "touch": {
+      "name": "Roulette Chạm",
+      "description": "Đặt ngón tay lên màn hình! Ngón tay đỏ bị phạt!"
+    }
+  },
+  "Penalty": {
+    "title": "PHẠT!",
+    "subtitle": "Bạn đã bị bắt!",
+    "playAgain": "Chơi Lại",
+    "backToLobby": "Về Sảnh"
+  },
+  "Common": {
+    "back": "Quay lại",
+    "about": "Giới thiệu",
+    "terms": "Điều khoản",
+    "privacy": "Bảo mật"
+  },
+  "About": {
+    "title": "Giới thiệu Party Game",
+    "description": "Party Game là ứng dụng web trò chơi mini miễn phí, chơi cùng bạn bè chỉ với một chiếc điện thoại. Được thiết kế trực quan cho mọi người tại các buổi tiệc, quán bar và tụ họp.",
+    "featuresTitle": "Trò chơi",
+    "feature1": "Hàm Cá Sấu: Trò chơi nhấn răng ngẫu nhiên",
+    "feature2": "Chuyền Bom: Trò chơi chuyền bom hẹn giờ ngẫu nhiên",
+    "feature3": "Roulette Cướp Biển: Trò chơi đâm kiếm vào thùng",
+    "feature4": "Roulette Chạm: Chọn người bị phạt bằng đa điểm chạm",
+    "supportTitle": "Ngôn ngữ hỗ trợ",
+    "support": "Tiếng Hàn, Tiếng Anh, Tiếng Việt, Tiếng Thái, Tiếng Lào",
+    "contactTitle": "Liên hệ",
+    "contact": "Mọi thắc mắc vui lòng liên hệ qua email.",
+    "email": "tjgksdnf3275@gmail.com"
+  },
+  "Terms": {
+    "title": "Điều khoản Dịch vụ",
+    "updated": "Cập nhật lần cuối: 19 tháng 4, 2026",
+    "s1title": "1. Chấp nhận Điều khoản",
+    "s1": "Khi sử dụng Party Game ('Dịch vụ'), bạn đồng ý với các Điều khoản Dịch vụ này.",
+    "s2title": "2. Mô tả Dịch vụ",
+    "s2": "Dịch vụ cung cấp các trò chơi mini miễn phí gồm Hàm Cá Sấu, Chuyền Bom, Roulette Cướp Biển và Roulette Chạm.",
+    "s3title": "3. Hành vi Người dùng",
+    "s3": "Bạn đồng ý chỉ sử dụng Dịch vụ cho mục đích hợp pháp và không vi phạm quyền của người khác.",
+    "s4title": "4. Quảng cáo",
+    "s4": "Dịch vụ có thể hiển thị quảng cáo của bên thứ ba để hỗ trợ hoạt động.",
+    "s5title": "5. Miễn trách nhiệm",
+    "s5": "Dịch vụ được cung cấp 'nguyên trạng' mà không có bảo đảm nào.",
+    "s6title": "6. Thay đổi Điều khoản",
+    "s6": "Chúng tôi có quyền sửa đổi các điều khoản này bất kỳ lúc nào."
+  },
+  "Privacy": {
+    "title": "Chính sách Quyền riêng tư",
+    "updated": "Cập nhật lần cuối: 19 tháng 4, 2026",
+    "intro": "Party Game coi trọng quyền riêng tư của bạn.",
+    "s1title": "1. Thông tin Thu thập",
+    "s1": "Dịch vụ không yêu cầu đăng ký và không trực tiếp thu thập thông tin cá nhân. Tuy nhiên, các đối tác quảng cáo (Google AdSense, Kakao AdFit) có thể thu thập cookie và dữ liệu ẩn danh.",
+    "s2title": "2. Cookie và Quảng cáo",
+    "s2": "Chúng tôi sử dụng Google AdSense để hiển thị quảng cáo. Bạn có thể từ chối quảng cáo cá nhân hóa tại https://adssettings.google.com.",
+    "s3title": "3. Chia sẻ Bên thứ ba",
+    "s3": "Chúng tôi không bán hoặc chia sẻ thông tin cá nhân của bạn với bên thứ ba.",
+    "s4title": "4. Liên hệ",
+    "s4": "Mọi thắc mắc về quyền riêng tư, vui lòng liên hệ:",
+    "email": "tjgksdnf3275@gmail.com"
+  }
+}
