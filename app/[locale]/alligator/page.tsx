@@ -7,164 +7,137 @@ import PenaltyScreen from "../components/PenaltyScreen";
 
 const TOTAL_TEETH = 12;
 
+// 이미지 위 이빨 위치 (%) — 위턱 6개, 아래턱 6개
+// 이미지 비율 3:4 기준으로 조정
+const BASE_POSITIONS: { x: number; y: number; w: number; h: number }[] = [
+  // 위턱 (왼→오른, 곡선을 따라)
+  { x: 19, y: 18, w: 8,  h: 11 },
+  { x: 28, y: 14, w: 9,  h: 12 },
+  { x: 38, y: 11, w: 10, h: 13 },
+  { x: 49, y: 10, w: 10, h: 13 },
+  { x: 60, y: 11, w: 9,  h: 12 },
+  { x: 70, y: 14, w: 8,  h: 11 },
+  // 아래턱 (왼→오른, 곡선을 따라)
+  { x: 25, y: 55, w: 9,  h: 12 },
+  { x: 35, y: 60, w: 10, h: 13 },
+  { x: 46, y: 63, w: 10, h: 13 },
+  { x: 57, y: 63, w: 10, h: 13 },
+  { x: 67, y: 60, w: 9,  h: 12 },
+  { x: 77, y: 55, w: 8,  h: 11 },
+];
+
+// 매 게임 소폭 랜덤 오프셋 (±2%)
+function generatePositions() {
+  return BASE_POSITIONS.map((p) => ({
+    ...p,
+    x: p.x + (Math.random() - 0.5) * 3,
+    y: p.y + (Math.random() - 0.5) * 2.5,
+  }));
+}
+
 function pickPenaltyIndex() {
   return Math.floor(Math.random() * TOTAL_TEETH);
 }
 
-// 위턱 6개 + 아래턱 6개, 게임마다 x 간격 랜덤
-function generatePositions() {
-  const topRowY = 40 + Math.random() * 6;   // 위턱 줄 y
-  const botRowY = 63 + Math.random() * 6;   // 아래턱 줄 y
-  const startX = 12 + Math.random() * 4;    // 시작 x
-  const gap = 12 + Math.random() * 3;       // 이빨 간격
+type ToothState = "idle" | "pulled" | "cavity";
 
-  const raw = Array.from({ length: TOTAL_TEETH }, (_, i) => ({
-    x: startX + (i % 6) * gap + Math.random() * 2.5,
-    y: i < 6 ? topRowY : botRowY,
-  }));
-
-  // 인덱스 셔플 (어떤 이빨이 penalty인지 위치로 티 안 나게)
-  const order = Array.from({ length: TOTAL_TEETH }, (_, i) => i);
-  for (let i = order.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [order[i], order[j]] = [order[j], order[i]];
-  }
-  return order.map((idx) => raw[idx]);
-}
-
-type ToothState = "idle" | "pressed" | "penalty";
-
-// 이빨 하나 SVG
+// 이빨 하나 — 처음엔 하얀 이빨, 눌리면 상태 변화
 function Tooth({
   state,
+  isBottom,
   onPress,
 }: {
   state: ToothState;
+  isBottom: boolean;
   onPress: () => void;
 }) {
-  const isIdle = state === "idle";
-  const isSafe = state === "pressed";
-  const isPenalty = state === "penalty";
+  if (state === "pulled") {
+    // 뽑힌 이빨: 잇몸만 남음
+    return (
+      <svg viewBox="0 0 50 50" className="w-full h-full opacity-50" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="25" cy={isBottom ? 12 : 38} rx="18" ry="8" fill="#7b1a2e" opacity="0.7" />
+      </svg>
+    );
+  }
 
+  if (state === "cavity") {
+    // 충치 이빨: 검은 반점 + 갈색
+    return (
+      <svg viewBox="0 0 50 70" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        {/* 잇몸 */}
+        <ellipse cx="25" cy={isBottom ? 12 : 58} rx="20" ry="10" fill="#7b1a2e" />
+        {/* 이빨 몸통 (갈색/충치) */}
+        <path
+          d={isBottom
+            ? "M 8 18 Q 5 50 12 65 Q 25 72 38 65 Q 45 50 42 18 Q 35 10 25 10 Q 15 10 8 18 Z"
+            : "M 8 52 Q 5 20 12 5 Q 25 -2 38 5 Q 45 20 42 52 Q 35 60 25 60 Q 15 60 8 52 Z"
+          }
+          fill="#5a3010"
+          stroke="#3a1a05"
+          strokeWidth="1"
+        />
+        {/* 충치 검은 반점들 */}
+        <ellipse cx="20" cy={isBottom ? 38 : 32} rx="6" ry="5" fill="#1a0a00" opacity="0.9" />
+        <ellipse cx="32" cy={isBottom ? 30 : 40} rx="5" ry="4" fill="#1a0a00" opacity="0.8" />
+        <ellipse cx="24" cy={isBottom ? 50 : 20} rx="4" ry="3" fill="#1a0a00" opacity="0.7" />
+        {/* 해골 */}
+        <text
+          x="25" y={isBottom ? 28 : 48}
+          textAnchor="middle"
+          fontSize="14"
+          fill="white"
+          opacity="0.8"
+        >💀</text>
+      </svg>
+    );
+  }
+
+  // 기본: 하얀 정상 이빨
   return (
     <svg
-      viewBox="0 0 40 52"
-      className={[
-        "w-full h-full select-none touch-none transition-transform duration-100",
-        isIdle ? "active:scale-90 cursor-pointer" : "",
-        isSafe ? "opacity-40" : "",
-        isPenalty ? "scale-125" : "",
-      ].join(" ")}
-      onPointerDown={isIdle ? onPress : undefined}
+      viewBox="0 0 50 70"
+      className="w-full h-full cursor-pointer active:scale-90 transition-transform duration-100 select-none touch-none drop-shadow-md"
+      onPointerDown={onPress}
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* 잇몸 */}
       <ellipse
-        cx="20"
-        cy={isSafe ? 42 : 38}
-        rx="16"
+        cx="25"
+        cy={isBottom ? 12 : 58}
+        rx="20"
         ry="10"
-        fill={isPenalty ? "#ff3333" : "#c0394a"}
-        className="transition-all duration-150"
+        fill="#c0394a"
       />
       {/* 이빨 몸통 */}
-      <rect
-        x="7"
-        y={isSafe ? 14 : 4}
-        width="26"
-        height={isSafe ? 28 : 34}
-        rx="8"
-        fill={isPenalty ? "#ffdddd" : "white"}
-        stroke={isPenalty ? "#ff6666" : "#e8e0d8"}
-        strokeWidth="1.5"
-        className="transition-all duration-150"
+      <path
+        d={isBottom
+          ? "M 8 18 Q 5 50 12 65 Q 25 72 38 65 Q 45 50 42 18 Q 35 10 25 10 Q 15 10 8 18 Z"
+          : "M 8 52 Q 5 20 12 5 Q 25 -2 38 5 Q 45 20 42 52 Q 35 60 25 60 Q 15 60 8 52 Z"
+        }
+        fill="#f8f4ee"
+        stroke="#ddd5c8"
+        strokeWidth="1"
       />
-      {/* 이빨 윗면 (3D 광택) */}
+      {/* 이빨 측면 그림자 */}
+      <path
+        d={isBottom
+          ? "M 42 18 Q 45 50 38 65 Q 35 67 33 65 Q 40 50 37 18 Z"
+          : "M 42 52 Q 45 20 38 5 Q 35 3 33 5 Q 40 20 37 52 Z"
+        }
+        fill="#e0d8cc"
+        opacity="0.6"
+      />
+      {/* 광택 */}
       <ellipse
         cx="20"
-        cy={isSafe ? 14 : 4}
-        rx="13"
-        ry="7"
-        fill={isPenalty ? "#ffbbbb" : "#f8f5f0"}
-        stroke={isPenalty ? "#ff6666" : "#e8e0d8"}
-        strokeWidth="1.5"
-        className="transition-all duration-150"
+        cy={isBottom ? 30 : 40}
+        rx="5"
+        ry="8"
+        fill="white"
+        opacity="0.4"
+        transform={isBottom ? "" : ""}
       />
-      {/* 광택 하이라이트 */}
-      {isIdle && (
-        <ellipse cx="15" cy={3} rx="5" ry="3" fill="white" opacity="0.6" />
-      )}
-      {/* 벌칙 이빨 - X 표시 */}
-      {isPenalty && (
-        <>
-          <line x1="14" y1="16" x2="26" y2="28" stroke="#ff4444" strokeWidth="3" strokeLinecap="round" />
-          <line x1="26" y1="16" x2="14" y2="28" stroke="#ff4444" strokeWidth="3" strokeLinecap="round" />
-        </>
-      )}
     </svg>
-  );
-}
-
-// 악어 입 SVG (배경)
-function AlligatorMouth({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative w-full" style={{ aspectRatio: "16/10" }}>
-      <svg
-        viewBox="0 0 480 300"
-        className="absolute inset-0 w-full h-full drop-shadow-2xl"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {/* 그림자 */}
-        <ellipse cx="240" cy="270" rx="200" ry="18" fill="black" opacity="0.25" />
-
-        {/* ── 위턱 ── */}
-        <path d="M 30 160 Q 240 5 450 160 L 460 0 L 20 0 Z" fill="#33691e" />
-        {/* 위턱 하이라이트 */}
-        <path d="M 30 160 Q 240 5 450 160" fill="none" stroke="#558b2f" strokeWidth="5" />
-        {/* 위 비늘 (장식) */}
-        {[70, 130, 190, 240, 290, 350, 410].map((x, i) => (
-          <ellipse key={i} cx={x} cy={Math.max(10, 160 - Math.sqrt(Math.max(0, 220 * 220 - (x - 240) * (x - 240))) * 155 / 220) + 12}
-            rx="18" ry="10" fill="#2e7d32" opacity="0.5" />
-        ))}
-
-        {/* ── 아래턱 ── */}
-        <path d="M 30 160 Q 240 295 450 160 L 460 300 L 20 300 Z" fill="#388e3c" />
-        {/* 아래턱 하이라이트 */}
-        <path d="M 30 160 Q 240 295 450 160" fill="none" stroke="#66bb6a" strokeWidth="5" />
-
-        {/* ── 입 안쪽 ── */}
-        <ellipse cx="240" cy="160" rx="208" ry="115" fill="#1a0208" />
-
-        {/* 혀 */}
-        <ellipse cx="240" cy="198" rx="72" ry="26" fill="#ad1457" />
-        <ellipse cx="240" cy="200" rx="72" ry="10" fill="#880e4f" opacity="0.5" />
-        <line x1="240" y1="172" x2="240" y2="224" stroke="#880e4f" strokeWidth="2.5" strokeLinecap="round" />
-
-        {/* ── 눈 왼쪽 ── */}
-        <ellipse cx="90" cy="55" rx="32" ry="26" fill="#2e7d32" />
-        <ellipse cx="90" cy="55" rx="20" ry="22" fill="#0a0a0a" />
-        <ellipse cx="83" cy="48" rx="7" ry="7" fill="white" />
-        <ellipse cx="84" cy="49" rx="3" ry="3" fill="#222" />
-
-        {/* ── 눈 오른쪽 ── */}
-        <ellipse cx="390" cy="55" rx="32" ry="26" fill="#2e7d32" />
-        <ellipse cx="390" cy="55" rx="20" ry="22" fill="#0a0a0a" />
-        <ellipse cx="383" cy="48" rx="7" ry="7" fill="white" />
-        <ellipse cx="384" cy="49" rx="3" ry="3" fill="#222" />
-
-        {/* 콧구멍 */}
-        <ellipse cx="212" cy="22" rx="10" ry="6" fill="#1b5e20" />
-        <ellipse cx="268" cy="22" rx="10" ry="6" fill="#1b5e20" />
-
-        {/* 잇몸 라인 (위) */}
-        <path d="M 55 155 Q 240 48 425 155" fill="none" stroke="#880e4f" strokeWidth="12" strokeLinecap="round" opacity="0.6" />
-        {/* 잇몸 라인 (아래) */}
-        <path d="M 55 165 Q 240 272 425 165" fill="none" stroke="#880e4f" strokeWidth="12" strokeLinecap="round" opacity="0.6" />
-      </svg>
-
-      {/* 이빨 버튼들 */}
-      {children}
-    </div>
   );
 }
 
@@ -174,7 +147,6 @@ export default function AlligatorPage() {
   const params = useParams();
   const locale = params.locale as string;
 
-  const [gameKey, setGameKey] = useState(0); // 리셋 강제 트리거
   const [penaltyIndex, setPenaltyIndex] = useState(pickPenaltyIndex);
   const [teeth, setTeeth] = useState<ToothState[]>(Array(TOTAL_TEETH).fill("idle"));
   const [positions, setPositions] = useState(generatePositions);
@@ -183,17 +155,20 @@ export default function AlligatorPage() {
   const handlePress = useCallback(
     (i: number) => {
       if (teeth[i] !== "idle" || gameOver) return;
+      if (typeof navigator !== "undefined" && navigator.vibrate) {
+        navigator.vibrate(40);
+      }
       if (i === penaltyIndex) {
         setTeeth((prev) => {
           const next = [...prev];
-          next[i] = "penalty";
+          next[i] = "cavity";
           return next;
         });
-        setTimeout(() => setGameOver(true), 500);
+        setTimeout(() => setGameOver(true), 800);
       } else {
         setTeeth((prev) => {
           const next = [...prev];
-          next[i] = "pressed";
+          next[i] = "pulled";
           return next;
         });
       }
@@ -202,16 +177,13 @@ export default function AlligatorPage() {
   );
 
   const restart = () => {
-    const newPositions = generatePositions();
-    const newPenalty = pickPenaltyIndex();
-    setPenaltyIndex(newPenalty);
-    setPositions(newPositions);
+    setPenaltyIndex(pickPenaltyIndex());
+    setPositions(generatePositions());
     setTeeth(Array(TOTAL_TEETH).fill("idle"));
     setGameOver(false);
-    setGameKey((k) => k + 1);
   };
 
-  const safeCount = teeth.filter((s) => s === "pressed").length;
+  const pulledCount = teeth.filter((s) => s === "pulled").length;
 
   return (
     <>
@@ -222,9 +194,9 @@ export default function AlligatorPage() {
         />
       )}
 
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-green-950 to-emerald-950 px-3 py-5">
+      <div className="min-h-screen flex flex-col bg-black">
         {/* 헤더 */}
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between px-4 py-4 z-10">
           <button
             onClick={() => router.push(`/${locale}/lobby`)}
             className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
@@ -233,48 +205,65 @@ export default function AlligatorPage() {
           </button>
           <h1 className="text-xl font-black text-white">{t("alligator.name")}</h1>
           <span className="text-white/50 text-sm w-16 text-right">
-            {safeCount}/{TOTAL_TEETH - 1}
+            {pulledCount}/{TOTAL_TEETH - 1}
           </span>
         </div>
 
-        <p className="text-center text-green-300/60 text-xs mb-3">
-          {t("alligator.description")}
-        </p>
+        {/* 악어 입 배경 + 이빨 버튼 */}
+        <div className="flex-1 flex items-center justify-center px-2">
+          <div
+            className="relative w-full max-w-sm"
+            style={{ aspectRatio: "3/4" }}
+          >
+            {/* 배경 이미지 */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/alligator-bg.png"
+              alt="alligator mouth"
+              className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+              draggable={false}
+            />
 
-        {/* 악어 입 */}
-        <div className="flex-1 flex items-center justify-center px-1">
-          <div className="w-full max-w-lg" key={gameKey}>
-            <AlligatorMouth>
-              {teeth.map((state, i) => (
+            {/* 이빨 버튼 오버레이 */}
+            {teeth.map((state, i) => {
+              const p = positions[i];
+              const isBottom = i >= 6;
+              return (
                 <div
                   key={i}
                   style={{
                     position: "absolute",
-                    left: `${positions[i].x}%`,
-                    top: `${positions[i].y}%`,
-                    width: "10%",
-                    aspectRatio: "0.8",
-                    transform: "translate(-50%, -50%)",
+                    left: `${p.x}%`,
+                    top: `${p.y}%`,
+                    width: `${p.w}%`,
+                    height: `${p.h}%`,
                   }}
+                  className={state === "cavity" ? "animate-pulse" : ""}
                 >
-                  <Tooth state={state} onPress={() => handlePress(i)} />
+                  <Tooth
+                    state={state}
+                    isBottom={isBottom}
+                    onPress={() => handlePress(i)}
+                  />
                 </div>
-              ))}
-            </AlligatorMouth>
+              );
+            })}
           </div>
         </div>
 
-        {/* 진행 바 */}
-        <div className="mt-3 max-w-lg mx-auto w-full px-2">
-          <div className="h-2 rounded-full bg-white/10 overflow-hidden">
-            <div
-              className="h-full bg-green-400 rounded-full transition-all duration-300"
-              style={{ width: `${(safeCount / (TOTAL_TEETH - 1)) * 100}%` }}
-            />
+        {/* 하단 진행 표시 */}
+        <div className="px-4 pb-6 pt-3">
+          <div className="max-w-sm mx-auto">
+            <p className="text-center text-white/40 text-xs mb-2">
+              {t("alligator.description")}
+            </p>
+            <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+              <div
+                className="h-full bg-emerald-400 rounded-full transition-all duration-300"
+                style={{ width: `${(pulledCount / (TOTAL_TEETH - 1)) * 100}%` }}
+              />
+            </div>
           </div>
-          <p className="text-center text-green-700 text-xs mt-1">
-            {safeCount} / {TOTAL_TEETH - 1}
-          </p>
         </div>
       </div>
     </>
