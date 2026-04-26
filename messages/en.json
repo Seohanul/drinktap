@@ -29,6 +29,10 @@
     "shark": {
       "name": "Shark Teeth",
       "description": "Press teeth one by one! Hit a rotten one and you pay!"
+    },
+    "card": {
+      "name": "Cursed Diamond",
+      "description": "Avoid the skull diamond! Pick it and pay!"
     }
   },
   "Penalty": {

@@ -29,6 +29,10 @@
     "shark": {
       "name": "상어 이빨",
       "description": "이빨을 하나씩 눌러라! 충치를 건드리면 벌칙!"
+    },
+    "card": {
+      "name": "저주받은 다이아",
+      "description": "해골 다이아를 피해라! 뽑으면 벌칙!"
     }
   },
   "Penalty": {

@@ -29,6 +29,10 @@
     "shark": {
       "name": "Răng Cá Mập",
       "description": "Bấm từng chiếc răng! Chạm vào răng sâu là bị phạt!"
+    },
+    "card": {
+      "name": "Kim Cương Bị Nguyền",
+      "description": "Tránh kim cương đầu lâu! Chọn trúng là bị phạt!"
     }
   },
   "Penalty": {

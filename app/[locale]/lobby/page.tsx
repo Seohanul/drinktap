@@ -12,32 +12,11 @@ const GAMES = [
     path: "shark",
   },
   {
-    key: "alligator",
-    emoji: "🐊",
-    color: "from-green-500 to-emerald-700",
-    border: "border-green-400/40",
-    path: "alligator",
-  },
-  {
-    key: "bomb",
-    emoji: "💣",
-    color: "from-orange-500 to-red-700",
-    border: "border-orange-400/40",
-    path: "bomb",
-  },
-  {
-    key: "pirate",
-    emoji: "🏴‍☠️",
-    color: "from-yellow-500 to-amber-700",
-    border: "border-yellow-400/40",
-    path: "pirate",
-  },
-  {
-    key: "touch",
-    emoji: "👆",
-    color: "from-pink-500 to-rose-700",
-    border: "border-pink-400/40",
-    path: "touch",
+    key: "card",
+    emoji: "💎",
+    color: "from-indigo-500 to-purple-700",
+    border: "border-indigo-400/40",
+    path: "card",
   },
 ] as const;
 
