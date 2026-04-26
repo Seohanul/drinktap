@@ -25,6 +25,10 @@
     "touch": {
       "name": "Touch Roulette",
       "description": "Put your finger on screen! The red one gets penalized!"
+    },
+    "shark": {
+      "name": "Shark Teeth",
+      "description": "Press teeth one by one! Hit a rotten one and you pay!"
     }
   },
   "Penalty": {

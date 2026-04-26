@@ -47,39 +47,15 @@ export default function PenaltyScreen({
       </div>
 
       {/* Middle: ad slot */}
-      <div className="w-full max-w-sm" ref={adRef}>
-        {/* Kakao AdFit / Google AdSense slot — swap in real ad unit IDs */}
-        <div
-          id="ad-slot"
-          className="w-full min-h-[100px] flex items-center justify-center rounded-xl bg-black/20 text-white/30 text-xs"
-        >
-          AD
-        </div>
-        {/*
-          To activate Kakao AdFit, replace the div above with:
-          <ins
-            className="kakao_ad_area"
-            style={{ display: "none" }}
-            data-ad-unit="DAN-XXXXXXXXXXXXXXXX"
-            data-ad-width="320"
-            data-ad-height="100"
-          />
-          <Script src="//t1.daumcdn.net/kas/static/ba.min.js" strategy="lazyOnload" />
-
-          To activate Google AdSense, replace with:
-          <ins
-            className="adsbygoogle"
-            style={{ display: "block" }}
-            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-            data-ad-slot="XXXXXXXXXX"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
-          <Script strategy="lazyOnload" onLoad={() => {
-            (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-            (window as any).adsbygoogle.push({});
-          }} src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
-        */}
+      <div className="w-full max-w-sm flex items-center justify-center" ref={adRef}>
+        <ins
+          className="kakao_ad_area"
+          style={{ display: "none" }}
+          data-ad-unit="DAN-vI5KTjMGteTbKwkc"
+          data-ad-width="300"
+          data-ad-height="250"
+        />
+        <Script src="//t1.kakaocdn.net/kas/static/ba.min.js" strategy="lazyOnload" />
       </div>
 
       {/* Bottom: buttons */}

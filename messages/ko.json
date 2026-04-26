@@ -25,6 +25,10 @@
     "touch": {
       "name": "터치 룰렛",
       "description": "손가락을 올려라! 붉게 빛나면 벌칙!"
+    },
+    "shark": {
+      "name": "상어 이빨",
+      "description": "이빨을 하나씩 눌러라! 충치를 건드리면 벌칙!"
     }
   },
   "Penalty": {

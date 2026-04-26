@@ -5,6 +5,13 @@ import { useTranslations } from "next-intl";
 
 const GAMES = [
   {
+    key: "shark",
+    emoji: "🦈",
+    color: "from-blue-500 to-cyan-700",
+    border: "border-blue-400/40",
+    path: "shark",
+  },
+  {
     key: "alligator",
     emoji: "🐊",
     color: "from-green-500 to-emerald-700",

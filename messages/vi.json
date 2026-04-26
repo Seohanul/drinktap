@@ -25,6 +25,10 @@
     "touch": {
       "name": "Roulette Chạm",
       "description": "Đặt ngón tay lên màn hình! Ngón tay đỏ bị phạt!"
+    },
+    "shark": {
+      "name": "Răng Cá Mập",
+      "description": "Bấm từng chiếc răng! Chạm vào răng sâu là bị phạt!"
     }
   },
   "Penalty": {
