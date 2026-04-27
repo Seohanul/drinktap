@@ -33,6 +33,10 @@
     "card": {
       "name": "Cursed Diamond",
       "description": "Avoid the skull diamond! Pick it and pay!"
+    },
+    "tension": {
+      "name": "Tension Panic",
+      "description": "Stop pouring before it overflows! Spill it and pay!"
     }
   },
   "Penalty": {

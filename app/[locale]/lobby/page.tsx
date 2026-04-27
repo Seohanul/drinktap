@@ -18,6 +18,13 @@ const GAMES = [
     border: "border-indigo-400/40",
     path: "card",
   },
+  {
+    key: "tension",
+    emoji: "🍺",
+    color: "from-amber-500 to-yellow-700",
+    border: "border-amber-400/40",
+    path: "tension",
+  },
 ] as const;
 
 export default function LobbyPage() {

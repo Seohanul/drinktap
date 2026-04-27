@@ -33,6 +33,10 @@
     "card": {
       "name": "저주받은 다이아",
       "description": "해골 다이아를 피해라! 뽑으면 벌칙!"
+    },
+    "tension": {
+      "name": "텐션 패닉",
+      "description": "맥주가 넘치기 직전에 떼라! 넘치면 벌칙!"
     }
   },
   "Penalty": {

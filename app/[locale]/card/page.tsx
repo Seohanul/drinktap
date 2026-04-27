@@ -75,6 +75,7 @@ export default function CardPage() {
   const [flipped, setFlipped] = useState<boolean[]>([]);
   const [transforms, setTransforms] = useState<Transform[]>([]);
   const [gameOver, setGameOver] = useState(false);
+  const [locked, setLocked] = useState(false);
 
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const cardOrderRef = useRef<CardFace[]>([]);
@@ -93,6 +94,7 @@ export default function CardPage() {
     setFlipped(Array(n).fill(false));
     setTransforms(zero);
     setGameOver(false);
+    setLocked(false);
     setPhase("preview");
   }, []);
 
@@ -167,7 +169,7 @@ export default function CardPage() {
         });
 
         setT(updates);
-        await sleep(400);
+        await sleep(200);
         if (cancelled) return;
 
         // Rotate cardOrder to match the circular permutation
@@ -184,13 +186,13 @@ export default function CardPage() {
         // Instant reset
         const resetInstant = chosen.map((i) => ({ i, t: { tx: 0, ty: 0, rot: 0, instant: true } }));
         setT(resetInstant);
-        await sleep(30);
+        await sleep(15);
         if (cancelled) return;
 
         // Re-enable transitions
         const resetAnim = chosen.map((i) => ({ i, t: { tx: 0, ty: 0, rot: 0, instant: false } }));
         setT(resetAnim);
-        await sleep(120);
+        await sleep(60);
       }
 
       if (!cancelled) setPhase("playing");
@@ -202,16 +204,17 @@ export default function CardPage() {
 
   const handleCardPress = useCallback(
     (i: number) => {
-      if (phase !== "playing" || flipped[i]) return;
+      if (phase !== "playing" || flipped[i] || locked) return;
       if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(40);
       const newFlipped = [...flipped];
       newFlipped[i] = true;
       setFlipped(newFlipped);
       if (cardOrder[i] === "skull") {
+        setLocked(true);
         setTimeout(() => setGameOver(true), 900);
       }
     },
-    [phase, flipped, cardOrder]
+    [phase, flipped, cardOrder, locked]
   );
 
   const restart = () => startGame(playerCount);
@@ -263,7 +266,7 @@ export default function CardPage() {
                   onClick={() => handleCardPress(i)}
                   style={{
                     transform: `translate(${t.tx}px, ${t.ty}px) rotate(${t.rot}deg)`,
-                    transition: t.instant ? "none" : "transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94)",
+                    transition: t.instant ? "none" : "transform 0.18s cubic-bezier(0.25,0.46,0.45,0.94)",
                     zIndex: (t.tx !== 0 || t.ty !== 0) ? 10 : 1,
                     aspectRatio: "2/3",
                     position: "relative",
@@ -303,9 +306,9 @@ export default function CardPage() {
                         WebkitBackfaceVisibility: "hidden",
                         borderRadius: "12px",
                         overflow: "hidden",
-                        backgroundColor: face === "skull" ? "#1a0005" : "#ffffff",
+                        backgroundColor: "#ffffff",
                         backgroundImage: `url('${face === "skull" ? "/card-skull.jpg" : "/card-diamond.jpg"}')`,
-                        backgroundSize: face === "skull" ? "75%" : "cover",
+                        backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
                       }}
