@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import Script from "next/script";
 
 interface PenaltyScreenProps {
   onPlayAgain: () => void;
@@ -17,10 +16,18 @@ export default function PenaltyScreen({
   const adRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Vibrate the device on penalty (if supported)
     if (typeof navigator !== "undefined" && navigator.vibrate) {
       navigator.vibrate([300, 100, 300, 100, 500]);
     }
+
+    // Kakao AdFit: inject script fresh every mount so ad re-initializes
+    const script = document.createElement("script");
+    script.src = "//t1.kakaocdn.net/kas/static/ba.min.js";
+    script.async = true;
+    document.head.appendChild(script);
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (
@@ -55,7 +62,6 @@ export default function PenaltyScreen({
           data-ad-width="300"
           data-ad-height="250"
         />
-        <Script src="//t1.kakaocdn.net/kas/static/ba.min.js" strategy="lazyOnload" />
       </div>
 
       {/* Bottom: buttons */}
