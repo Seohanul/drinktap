@@ -6,7 +6,19 @@ import { useTranslations } from "next-intl";
 import PenaltyScreen from "../components/PenaltyScreen";
 import HowToPlay from "../components/HowToPlay";
 
-const FILL_RATE = 1 / (5 * 60); // fills to 100% in ~5 seconds at 60fps
+const FILL_RATE = 1 / (5 * 60);
+
+// [leftPct, durationSec, delaySec, sizePx]
+const BUBBLES = [
+  [18, 2.1, 0.0, 4],
+  [42, 1.7, 0.6, 3],
+  [68, 2.4, 1.1, 5],
+  [30, 1.9, 0.3, 3],
+  [58, 2.2, 0.9, 4],
+  [12, 1.8, 1.6, 3],
+  [78, 2.0, 0.2, 4],
+  [50, 2.5, 1.3, 3],
+] as const;
 
 export default function TensionPage() {
   const ht = useTranslations("TensionHowTo");
@@ -89,7 +101,7 @@ export default function TensionPage() {
   }, []);
 
   const fillDisplay = Math.min(fill, 1.0);
-  const foamPct = fillDisplay > 0.72 ? (fillDisplay - 0.72) / 0.28 : 0;
+  const foamPct = fillDisplay > 0.78 ? (fillDisplay - 0.78) / 0.22 : 0;
   const overflowing = fill >= 1.0;
 
   return (
@@ -117,99 +129,185 @@ export default function TensionPage() {
         </div>
 
         <div className="flex-1 flex flex-col items-center justify-center gap-10 select-none px-6">
-          {/* Beer glass */}
-          <div className="flex flex-col items-center">
+
+          {/* Bottle + glass scene */}
+          <div style={{ position: "relative", width: 200, height: 380 }}>
+
+            {/* Cola bottle — upper right, tilts when holding */}
+            <div style={{
+              position: "absolute",
+              right: 12,
+              top: 15,
+              width: 44,
+              height: 105,
+              transform: `rotate(${holding ? -80 : 0}deg)`,
+              transformOrigin: "bottom center",
+              transition: "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)",
+            }}>
+              {/* Cap */}
+              <div style={{
+                position: "absolute", top: 0, left: "50%",
+                transform: "translateX(-50%)",
+                width: 14, height: 9,
+                background: "#CC0000",
+                borderRadius: "3px 3px 0 0",
+              }} />
+              {/* Neck */}
+              <div style={{
+                position: "absolute", top: 9, left: "50%",
+                transform: "translateX(-50%)",
+                width: 11, height: 20,
+                background: "linear-gradient(90deg, #2A0C04, #4A1808, #2A0C04)",
+              }} />
+              {/* Shoulder */}
+              <div style={{
+                position: "absolute", top: 29, left: "50%",
+                transform: "translateX(-50%)",
+                width: 36, height: 13,
+                background: "#3A1208",
+                clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
+              }} />
+              {/* Body */}
+              <div style={{
+                position: "absolute", top: 42, left: "50%",
+                transform: "translateX(-50%)",
+                width: 40, height: 55,
+                background: "linear-gradient(135deg, #6B2A10 0%, #3A1008 55%, #1A0804 100%)",
+                borderRadius: "3px 3px 8px 8px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                overflow: "hidden",
+              }}>
+                {/* Label */}
+                <div style={{
+                  position: "absolute",
+                  top: "18%", left: "10%", right: "10%", bottom: "18%",
+                  background: "rgba(170, 0, 0, 0.75)",
+                  borderRadius: "2px",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <span style={{ color: "white", fontSize: 7, fontWeight: 900, letterSpacing: 1 }}>COLA</span>
+                </div>
+                {/* Shine */}
+                <div style={{
+                  position: "absolute", top: 0, left: "12%",
+                  width: "14%", height: "100%",
+                  background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)",
+                  pointerEvents: "none",
+                }} />
+              </div>
+              {/* Base */}
+              <div style={{
+                position: "absolute", bottom: 0, left: "50%",
+                transform: "translateX(-50%)",
+                width: 40, height: 8,
+                background: "#150603",
+                borderRadius: "0 0 6px 6px",
+              }} />
+            </div>
+
+            {/* Pour stream — from bottle mouth to glass when holding */}
+            {holding && !exploded && (
+              <div style={{
+                position: "absolute",
+                left: 61,
+                top: 102,
+                width: 6,
+                height: 48,
+                background: "linear-gradient(180deg, #7C3010 0%, #3A1008 60%, transparent 100%)",
+                borderRadius: "3px",
+                animation: "streamWiggle 0.14s ease-in-out infinite",
+                transformOrigin: "top center",
+              }} />
+            )}
+
             {/* Overflow bubbles */}
-            <div style={{ height: 48, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
+            <div style={{
+              position: "absolute",
+              left: "50%",
+              transform: "translateX(-50%)",
+              bottom: 240,
+              height: 48,
+              display: "flex", alignItems: "flex-end", justifyContent: "center",
+            }}>
               {overflowing && (
                 <div className="text-3xl animate-bounce">🫧🫧🫧</div>
               )}
             </div>
 
             {/* Mug handle + glass body */}
-            <div style={{ position: "relative", width: 160 }}>
+            <div style={{ position: "absolute", bottom: 0, left: 20, width: 160 }}>
               {/* Handle */}
-              <div
-                style={{
-                  position: "absolute",
-                  right: -22,
-                  top: 30,
-                  width: 22,
-                  height: 80,
-                  borderRadius: "0 16px 16px 0",
-                  border: "3px solid rgba(255,255,255,0.2)",
-                  borderLeft: "none",
-                }}
-              />
+              <div style={{
+                position: "absolute",
+                right: -22, top: 30,
+                width: 22, height: 80,
+                borderRadius: "0 16px 16px 0",
+                border: "3px solid rgba(255,255,255,0.2)",
+                borderLeft: "none",
+              }} />
 
               {/* Glass body */}
-              <div
-                style={{
-                  width: 140,
-                  height: 220,
-                  position: "relative",
-                  borderRadius: "4px 4px 20px 20px",
-                  border: "3px solid rgba(255,255,255,0.2)",
+              <div style={{
+                width: 140, height: 220,
+                position: "relative",
+                borderRadius: "4px 4px 20px 20px",
+                border: "3px solid rgba(255,255,255,0.2)",
+                overflow: "hidden",
+                background: "rgba(255,255,255,0.03)",
+                boxShadow: "inset -10px 0 20px rgba(0,0,0,0.25)",
+              }}>
+                {/* Cola liquid with bubbles inside */}
+                <div style={{
+                  position: "absolute",
+                  bottom: 0, left: 0, right: 0,
+                  height: `${fillDisplay * 100}%`,
+                  background: "linear-gradient(180deg, #7C3010 0%, #4A1808 35%, #2A0C04 75%, #110400 100%)",
+                  transition: holding ? "none" : "height 0.15s ease-out",
                   overflow: "hidden",
-                  background: "rgba(255,255,255,0.03)",
-                  boxShadow: "inset -10px 0 20px rgba(0,0,0,0.25)",
-                }}
-              >
-                {/* Beer liquid */}
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: `${fillDisplay * 100}%`,
-                    background:
-                      "linear-gradient(180deg, #7C3010 0%, #4A1808 35%, #2A0C04 75%, #110400 100%)",
-                    transition: holding ? "none" : "height 0.15s ease-out",
-                  }}
-                />
+                }}>
+                  {/* Rising bubbles — visible from first pour */}
+                  {fillDisplay > 0.01 && BUBBLES.map(([lp, dur, delay, sz], i) => (
+                    <div key={i} style={{
+                      position: "absolute",
+                      bottom: "4%",
+                      left: `${lp}%`,
+                      width: sz,
+                      height: sz,
+                      borderRadius: "50%",
+                      background: "rgba(255,255,255,0.55)",
+                      animation: `rise ${dur}s ${delay}s linear infinite`,
+                    }} />
+                  ))}
+                </div>
 
                 {/* Foam */}
                 {foamPct > 0 && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: `${fillDisplay * 100}%`,
-                      left: 0,
-                      right: 0,
-                      height: `${Math.round(foamPct * 36)}px`,
-                      background:
-                        "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 100%)",
-                      borderRadius: "3px 3px 0 0",
-                      transition: holding ? "none" : "bottom 0.15s ease-out, height 0.15s ease-out",
-                    }}
-                  />
+                  <div style={{
+                    position: "absolute",
+                    bottom: `${fillDisplay * 100}%`,
+                    left: 0, right: 0,
+                    height: `${Math.round(foamPct * 28)}px`,
+                    background: "linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.5) 100%)",
+                    borderRadius: "3px 3px 0 0",
+                    transition: holding ? "none" : "bottom 0.15s ease-out, height 0.15s ease-out",
+                  }} />
                 )}
 
                 {/* Shine */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: "10%",
-                    width: "12%",
-                    height: "100%",
-                    background:
-                      "linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent)",
-                    pointerEvents: "none",
-                  }}
-                />
+                <div style={{
+                  position: "absolute", top: 0, left: "10%",
+                  width: "12%", height: "100%",
+                  background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent)",
+                  pointerEvents: "none",
+                }} />
               </div>
 
               {/* Base */}
-              <div
-                style={{
-                  width: "100%",
-                  height: 10,
-                  background: "rgba(255,255,255,0.12)",
-                  borderRadius: "0 0 10px 10px",
-                }}
-              />
+              <div style={{
+                width: "100%", height: 10,
+                background: "rgba(255,255,255,0.12)",
+                borderRadius: "0 0 10px 10px",
+              }} />
             </div>
           </div>
 
