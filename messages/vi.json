@@ -35,7 +35,7 @@
       "description": "Tránh kim cương đầu lâu! Chọn trúng là bị phạt!"
     },
     "tension": {
-      "name": "Tension Panic",
+      "name": "Surface Tension",
       "description": "Dừng đổ trước khi tràn! Tràn ra là bị phạt!"
     }
   },
@@ -66,7 +66,7 @@
     "cardDesc": "Các lá bài được xáo trộn úp xuống và mỗi người chọn một lá. Ai rút được đầu lâu thì bị phạt!",
     "cardHow": "Nhập số người → Ghi nhớ vị trí đầu lâu → Xáo bài → Mỗi người chọn một lá → Đầu lâu = bị phạt!",
     "tensionEmoji": "🍺",
-    "tensionName": "Tension Panic",
+    "tensionName": "Surface Tension",
     "tensionPlayers": "1 người mỗi lượt",
     "tensionDesc": "Giữ nút để đổ đầy ly. Thả tay trước khi tràn — nhưng không ai biết chính xác khi nào nó tràn!",
     "tensionHow": "Giữ nút → Xem ly đầy dần → Thả trước khi tràn → Tràn ra là bị phạt!",

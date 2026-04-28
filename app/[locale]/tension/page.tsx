@@ -108,7 +108,7 @@ export default function TensionPage() {
           >
             ‹ 뒤로
           </button>
-          <h1 className="text-xl font-black text-white">🍺 텐션 패닉</h1>
+          <h1 className="text-xl font-black text-white">🍺 Surface Tension</h1>
           <div className="w-16" />
         </div>
 
