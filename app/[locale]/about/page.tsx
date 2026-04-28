@@ -3,6 +3,8 @@
 import { useTranslations } from "next-intl";
 import InfoPageLayout from "../components/InfoPageLayout";
 
+const GAMES = ["shark", "card", "tension"] as const;
+
 export default function AboutPage() {
   const t = useTranslations("About");
 
@@ -15,19 +17,48 @@ export default function AboutPage() {
         <p className="text-gray-400 mt-3 leading-relaxed">{t("description")}</p>
       </div>
 
-      {/* Games */}
+      {/* Game cards */}
+      <section>
+        <h3 className="text-lg font-bold text-white mb-4 border-b border-white/10 pb-2">
+          {t("gameIntroTitle")}
+        </h3>
+        <div className="flex flex-col gap-4">
+          {GAMES.map((key) => (
+            <div
+              key={key}
+              className="rounded-2xl bg-white/5 border border-white/10 p-4 flex flex-col gap-3"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">{t(`${key}Emoji`)}</span>
+                <div>
+                  <div className="text-white font-black text-lg leading-tight">
+                    {t(`${key}Name`)}
+                  </div>
+                  <div className="text-white/40 text-xs mt-0.5">
+                    👥 {t(`${key}Players`)}
+                  </div>
+                </div>
+              </div>
+              <p className="text-gray-300 text-sm leading-relaxed">
+                {t(`${key}Desc`)}
+              </p>
+              <div className="bg-white/5 rounded-xl px-3 py-2">
+                <p className="text-white/40 text-xs font-bold mb-1">HOW TO PLAY</p>
+                <p className="text-gray-400 text-xs leading-relaxed">
+                  {t(`${key}How`)}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Tip */}
       <section>
         <h3 className="text-lg font-bold text-white mb-3 border-b border-white/10 pb-2">
-          {t("featuresTitle")}
+          {t("tipTitle")}
         </h3>
-        <ul className="space-y-2">
-          {(["feature1", "feature2", "feature3", "feature4"] as const).map((key) => (
-            <li key={key} className="flex items-start gap-2 text-gray-300">
-              <span className="text-indigo-400 mt-0.5">▸</span>
-              <span>{t(key)}</span>
-            </li>
-          ))}
-        </ul>
+        <p className="text-gray-400 leading-relaxed">{t("tip")}</p>
       </section>
 
       {/* Languages */}
