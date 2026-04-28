@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import PenaltyScreen from "../components/PenaltyScreen";
+import HowToPlay from "../components/HowToPlay";
 
 const FILL_RATE = 1 / (5 * 60); // fills to 100% in ~5 seconds at 60fps
 
@@ -221,6 +222,13 @@ export default function TensionPage() {
             </p>
           )}
         </div>
+
+        <HowToPlay>
+          <p><span className="text-white/70 font-semibold">준비</span><br />참여자 1명 이상, 스마트폰 1대. 한 명씩 돌아가며 도전합니다.</p>
+          <p><span className="text-white/70 font-semibold">진행</span><br />화면의 버튼을 꾹 누르고 있으면 컵에 액체가 채워집니다. 컵이 넘치기 직전에 손을 떼면 안전! 다음 사람이 이어서 더 채웁니다.</p>
+          <p><span className="text-white/70 font-semibold">벌칙</span><br />컵이 넘치는 순간 그 플레이어가 벌칙을 받습니다. 컵은 이전 플레이어가 채운 상태에서 이어지므로, 뒤로 갈수록 더 위험합니다.</p>
+          <p><span className="text-white/70 font-semibold">핵심</span><br />넘치는 시점은 매 게임마다 무작위로 정해집니다. 거의 다 찼다고 생각해도 아직 안 넘칠 수 있고, 생각보다 일찍 넘칠 수도 있습니다. 아무도 모릅니다!</p>
+        </HowToPlay>
 
         {/* Pour button */}
         {!exploded && (

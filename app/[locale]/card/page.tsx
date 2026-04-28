@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
 import PenaltyScreen from "../components/PenaltyScreen";
+import HowToPlay from "../components/HowToPlay";
 
 const MIN_PLAYERS = 2;
 const MAX_PLAYERS = 8;
@@ -320,10 +321,16 @@ export default function CardPage() {
           </div>
         </div>
 
-        <div className="px-4 pb-6 pt-2 text-center text-white/30 text-xs">
+        <div className="px-4 pt-2 text-center text-white/30 text-xs">
           {phase === "preview" && "해골 다이아 위치를 기억하세요!"}
           {phase === "playing" && "해골 다이아를 피하세요!"}
         </div>
+        <HowToPlay>
+          <p><span className="text-white/70 font-semibold">준비</span><br />참여자 2~8명, 스마트폰 1대. 인원 수를 입력하면 그 수만큼 카드가 준비됩니다. 카드는 다이아몬드 1장과 해골 다이아 1장으로 구성됩니다.</p>
+          <p><span className="text-white/70 font-semibold">진행</span><br />게임이 시작되면 잠깐 동안 어느 카드가 해골인지 공개됩니다. 위치를 잘 기억하세요! 그 뒤 카드가 무작위로 섞입니다. 순서대로 한 명씩 카드를 선택합니다.</p>
+          <p><span className="text-white/70 font-semibold">벌칙</span><br />해골 다이아를 선택한 플레이어가 벌칙을 받습니다. 카드가 섞이는 동안 해골 카드의 이동 경로를 눈으로 따라가는 것이 핵심 전략입니다.</p>
+          <p><span className="text-white/70 font-semibold">팁</span><br />다른 플레이어의 집중을 흐트러뜨리는 것도 전략! 인원이 많을수록 카드 선택의 긴장감이 높아집니다.</p>
+        </HowToPlay>
       </div>
     </>
   );
