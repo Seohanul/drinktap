@@ -107,5 +107,38 @@
     "s4title": "4. Contact",
     "s4": "For privacy-related inquiries, please contact us at:",
     "email": "tjgksdnf3275@gmail.com"
+  },
+  "SharkHowTo": {
+    "title": "How to Play",
+    "prepHeading": "Setup",
+    "prepBody": "2+ players, 1 smartphone. Before starting, choose the number of rotten teeth (1–5). More rotten teeth = more tension!",
+    "playHeading": "Gameplay",
+    "playBody": "Players take turns pressing one tooth at a time. Safe teeth turn dark when pressed. The moment you hit a rotten tooth, the screen flashes red and the penalty screen appears.",
+    "penaltyHeading": "Penalty",
+    "penaltyBody": "The player who hits the rotten tooth performs the pre-agreed penalty. Press Play Again to start a new game.",
+    "tipHeading": "Tip",
+    "tipBody": "Rotten tooth positions are randomized every game. Remembering last game's result won't help!"
+  },
+  "CardHowTo": {
+    "title": "How to Play",
+    "prepHeading": "Setup",
+    "prepBody": "2–8 players, 1 smartphone. Enter the number of players and that many cards will be dealt.",
+    "playHeading": "Gameplay",
+    "playBody": "At the start, the skull card is briefly revealed — memorize its position! Then the cards are shuffled randomly. Players take turns picking a card one by one.",
+    "penaltyHeading": "Penalty",
+    "penaltyBody": "The player who picks the skull diamond gets the penalty.",
+    "tipHeading": "Tip",
+    "tipBody": "Track the skull card with your eyes during the shuffle — that's the key strategy. Distracting other players is fair game too!"
+  },
+  "TensionHowTo": {
+    "title": "How to Play",
+    "prepHeading": "Setup",
+    "prepBody": "1+ players, 1 smartphone. Players take turns challenging one at a time.",
+    "playHeading": "Gameplay",
+    "playBody": "Hold the button to fill the cup with liquid. Release before it overflows to stay safe! The next player continues from where you left off.",
+    "penaltyHeading": "Penalty",
+    "penaltyBody": "The player whose hold causes the cup to overflow gets the penalty. Since each player adds to the same cup, the later you go, the more dangerous it gets.",
+    "tipHeading": "The Catch",
+    "tipBody": "The overflow point is randomized every game. It might look almost full but still be safe — or it might overflow way earlier than expected. Nobody knows!"
   }
 }

@@ -107,5 +107,38 @@
     "s4title": "4. Liên hệ",
     "s4": "Mọi thắc mắc về quyền riêng tư, vui lòng liên hệ:",
     "email": "tjgksdnf3275@gmail.com"
+  },
+  "SharkHowTo": {
+    "title": "Cách chơi",
+    "prepHeading": "Chuẩn bị",
+    "prepBody": "2+ người chơi, 1 điện thoại. Trước khi bắt đầu, chọn số răng sâu (1–5). Càng nhiều răng sâu càng căng thẳng!",
+    "playHeading": "Cách chơi",
+    "playBody": "Người chơi lần lượt nhấn từng chiếc răng. Răng an toàn sẽ tối đi khi nhấn. Khi chạm vào răng sâu, màn hình chớp đỏ và màn hình phạt xuất hiện.",
+    "penaltyHeading": "Hình phạt",
+    "penaltyBody": "Người chạm vào răng sâu phải thực hiện hình phạt đã thỏa thuận. Nhấn Chơi Lại để bắt đầu trò chơi mới.",
+    "tipHeading": "Mẹo",
+    "tipBody": "Vị trí răng sâu được ngẫu nhiên hóa mỗi trò chơi. Nhớ kết quả trò chơi trước không giúp ích gì!"
+  },
+  "CardHowTo": {
+    "title": "Cách chơi",
+    "prepHeading": "Chuẩn bị",
+    "prepBody": "2–8 người chơi, 1 điện thoại. Nhập số người chơi và bài sẽ được chia theo số đó.",
+    "playHeading": "Cách chơi",
+    "playBody": "Khi bắt đầu, lá bài đầu lâu được hé lộ trong giây lát — hãy ghi nhớ vị trí! Sau đó bài được xáo ngẫu nhiên. Lần lượt mỗi người chọn một lá bài.",
+    "penaltyHeading": "Hình phạt",
+    "penaltyBody": "Người chọn phải lá đầu lâu sẽ nhận hình phạt.",
+    "tipHeading": "Mẹo",
+    "tipBody": "Theo dõi lá đầu lâu bằng mắt trong lúc xáo bài — đó là chiến lược then chốt. Làm mất tập trung người khác cũng là chiến thuật hợp lệ!"
+  },
+  "TensionHowTo": {
+    "title": "Cách chơi",
+    "prepHeading": "Chuẩn bị",
+    "prepBody": "1+ người chơi, 1 điện thoại. Mỗi người thay nhau thử thách.",
+    "playHeading": "Cách chơi",
+    "playBody": "Giữ nút để đổ đầy ly. Thả tay trước khi tràn để an toàn! Người tiếp theo tiếp tục từ mức đó.",
+    "penaltyHeading": "Hình phạt",
+    "penaltyBody": "Người làm ly tràn sẽ nhận hình phạt. Vì mỗi người cộng vào cùng một ly, càng về sau càng nguy hiểm.",
+    "tipHeading": "Điều quan trọng",
+    "tipBody": "Điểm tràn được ngẫu nhiên hóa mỗi trò chơi. Có thể trông gần đầy mà vẫn an toàn — hoặc tràn sớm hơn dự kiến. Không ai biết trước!"
   }
 }

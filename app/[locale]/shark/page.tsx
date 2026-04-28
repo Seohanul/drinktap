@@ -109,6 +109,7 @@ function SetupScreen({ onStart }: { onStart: (count: number) => void }) {
 }
 
 export default function SharkPage() {
+  const ht = useTranslations("SharkHowTo");
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
@@ -280,11 +281,11 @@ export default function SharkPage() {
               />
             </div>
           </div>
-          <HowToPlay>
-            <p><span className="text-white/70 font-semibold">준비</span><br />참여자 2명 이상, 스마트폰 1대. 게임 시작 전 벌칙 개수(1~5개)를 정합니다. 숫자가 높을수록 긴장감이 올라갑니다.</p>
-            <p><span className="text-white/70 font-semibold">진행</span><br />한 명씩 돌아가며 이빨을 하나씩 누릅니다. 안전한 이빨은 눌리면 어둡게 변합니다. 충치 이빨을 건드리는 순간 화면이 빨갛게 번쩍이며 벌칙 화면이 나타납니다.</p>
-            <p><span className="text-white/70 font-semibold">벌칙</span><br />충치를 건드린 플레이어가 미리 정한 벌칙을 수행합니다. 다시 하기를 누르면 새 게임이 시작됩니다.</p>
-            <p><span className="text-white/70 font-semibold">팁</span><br />충치 위치는 매 게임마다 무작위로 바뀝니다. 이전 게임 결과를 기억해도 소용없어요!</p>
+          <HowToPlay title={ht("title")}>
+            <p><span className="text-white/70 font-semibold">{ht("prepHeading")}</span><br />{ht("prepBody")}</p>
+            <p><span className="text-white/70 font-semibold">{ht("playHeading")}</span><br />{ht("playBody")}</p>
+            <p><span className="text-white/70 font-semibold">{ht("penaltyHeading")}</span><br />{ht("penaltyBody")}</p>
+            <p><span className="text-white/70 font-semibold">{ht("tipHeading")}</span><br />{ht("tipBody")}</p>
           </HowToPlay>
         </div>
       </div>

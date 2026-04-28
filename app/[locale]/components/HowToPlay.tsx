@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function HowToPlay({ children }: { children: React.ReactNode }) {
+export default function HowToPlay({ title, children }: { title: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -11,7 +11,7 @@ export default function HowToPlay({ children }: { children: React.ReactNode }) {
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-center justify-between px-4 py-3 text-white/40 hover:text-white/60 text-sm transition-colors"
       >
-        <span className="font-semibold">게임 방법</span>
+        <span className="font-semibold">{title}</span>
         <span
           style={{
             display: "inline-block",
