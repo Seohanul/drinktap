@@ -20,9 +20,9 @@ const GAMES = [
   },
   {
     key: "tension",
-    emoji: "🍺",
-    color: "from-amber-500 to-yellow-700",
-    border: "border-amber-400/40",
+    emoji: "🥤",
+    color: "from-amber-900 to-stone-900",
+    border: "border-amber-900/60",
     path: "tension",
   },
 ] as const;

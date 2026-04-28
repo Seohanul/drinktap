@@ -35,8 +35,8 @@
       "description": "해골 다이아를 피해라! 뽑으면 벌칙!"
     },
     "tension": {
-      "name": "Surface Tension",
-      "description": "맥주가 넘치기 직전에 떼라! 넘치면 벌칙!"
+      "name": "표면장력",
+      "description": "콜라가 넘치기 직전에 떼라! 넘치면 벌칙!"
     }
   },
   "Penalty": {
@@ -65,8 +65,8 @@
     "cardPlayers": "2~8명",
     "cardDesc": "카드가 무작위로 섞인 뒤 한 명씩 카드를 선택합니다. 해골 다이아를 뽑은 플레이어가 벌칙!",
     "cardHow": "인원 수 입력 → 해골 위치 기억 → 카드 섞기 → 한 명씩 카드 선택 → 해골 뽑으면 벌칙!",
-    "tensionEmoji": "🍺",
-    "tensionName": "Surface Tension",
+    "tensionEmoji": "🥤",
+    "tensionName": "표면장력",
     "tensionPlayers": "1명씩 도전",
     "tensionDesc": "버튼을 누르고 있으면 컵이 채워집니다. 넘치기 직전에 손을 떼야 안전! 언제 넘칠지는 아무도 모릅니다.",
     "tensionHow": "버튼 꾹 누르기 → 컵이 차오르는 것 보기 → 넘치기 전에 손 떼기 → 넘치면 벌칙!",

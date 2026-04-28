@@ -10,6 +10,7 @@ const FILL_RATE = 1 / (5 * 60); // fills to 100% in ~5 seconds at 60fps
 
 export default function TensionPage() {
   const ht = useTranslations("TensionHowTo");
+  const t = useTranslations("Lobby");
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
@@ -111,7 +112,7 @@ export default function TensionPage() {
           >
             ‹ 뒤로
           </button>
-          <h1 className="text-xl font-black text-white">🍺 Surface Tension</h1>
+          <h1 className="text-xl font-black text-white">🥤 {t("tension.name")}</h1>
           <div className="w-16" />
         </div>
 
@@ -163,7 +164,7 @@ export default function TensionPage() {
                     right: 0,
                     height: `${fillDisplay * 100}%`,
                     background:
-                      "linear-gradient(180deg, #fbbf24 0%, #f59e0b 35%, #d97706 75%, #b45309 100%)",
+                      "linear-gradient(180deg, #7C3010 0%, #4A1808 35%, #2A0C04 75%, #110400 100%)",
                     transition: holding ? "none" : "height 0.15s ease-out",
                   }}
                 />
@@ -220,7 +221,7 @@ export default function TensionPage() {
             </div>
           ) : (
             <p className="text-white/40 text-sm text-center leading-relaxed whitespace-pre-line">
-              {holding ? "🍺 따르는 중..." : "꾹 누르면 맥주가 채워집니다\n넘치기 전에 떼세요!"}
+              {holding ? "🥤 따르는 중..." : "꾹 누르면 콜라가 채워집니다\n넘치기 전에 떼세요!"}
             </p>
           )}
         </div>
@@ -244,11 +245,11 @@ export default function TensionPage() {
               style={{
                 padding: "1.75rem",
                 background: holding
-                  ? "linear-gradient(135deg, #f59e0b, #d97706)"
+                  ? "linear-gradient(135deg, #7C3010, #3A1206)"
                   : "rgba(255,255,255,0.07)",
                 color: "white",
                 border: holding
-                  ? "2px solid #fbbf24"
+                  ? "2px solid #A04020"
                   : "2px solid rgba(255,255,255,0.13)",
                 userSelect: "none",
                 WebkitUserSelect: "none",
@@ -256,7 +257,7 @@ export default function TensionPage() {
                 transition: "background 0.1s, border 0.1s",
               }}
             >
-              {holding ? "🍺 따르는 중!" : "꾹 눌러서 따르기"}
+              {holding ? "🥤 따르는 중!" : "꾹 눌러서 따르기"}
             </button>
           </div>
         )}
