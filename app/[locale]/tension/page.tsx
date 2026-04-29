@@ -138,18 +138,18 @@ export default function TensionPage() {
 
             {/*
               Bottle geometry:
-                bottle center x=130 (left:95), pivot (bottom-center) at (130, 188)
-                idle +20deg → mouth leans right (resting)
-                hold -15deg → mouth at (130-43.5, 188-162.3) ≈ (87, 26)
-                glass top at y=190, stream falls ~155px into glass center
+                bottle center x=155 (left:120), pivot (bottom-center) at (155, 188)
+                idle +20deg → mouth leans right (resting, upper-right)
+                hold -40deg → mouth at (155-108, 188-128.7) ≈ (47, 59)
+                glass top at y=190, stream falls ~130px into glass
             */}
             <div style={{
               position: "absolute",
-              left: 95,
+              left: 120,
               top: 20,
               width: 70,
               height: 168,
-              transform: `rotate(${holding ? -15 : 20}deg)`,
+              transform: `rotate(${holding ? -40 : 20}deg)`,
               transformOrigin: "bottom center",
               transition: "transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1)",
             }}>
@@ -220,10 +220,10 @@ export default function TensionPage() {
             {holding && !exploded && (
               <div style={{
                 position: "absolute",
-                left: 83,
-                top: 35,
+                left: 44,
+                top: 60,
                 width: 7,
-                height: 155,
+                height: 130,
                 background: "linear-gradient(180deg, #8C3818 0%, #4A1808 50%, transparent 100%)",
                 borderRadius: "4px",
                 animation: "streamWiggle 0.14s ease-in-out infinite",
