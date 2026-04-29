@@ -101,7 +101,8 @@ export default function TensionPage() {
   }, []);
 
   const fillDisplay = Math.min(fill, 1.0);
-  const foamPct = fillDisplay > 0.78 ? (fillDisplay - 0.78) / 0.22 : 0;
+  // Foam visible from the very start, growing as glass fills
+  const foamHeight = fillDisplay > 0.01 ? Math.max(5, Math.round(fillDisplay * 26)) : 0;
   const overflowing = fill >= 1.0;
 
   return (
@@ -128,64 +129,72 @@ export default function TensionPage() {
           <div className="w-16" />
         </div>
 
-        <div className="flex-1 flex flex-col items-center justify-center gap-10 select-none px-6">
+        <div className="flex-1 flex flex-col items-center justify-center gap-8 select-none px-6">
 
-          {/* Bottle + glass scene */}
-          <div style={{ position: "relative", width: 200, height: 380 }}>
+          {/* Bottle + glass scene — 240px wide, 420px tall */}
+          <div style={{ position: "relative", width: 240, height: 420 }}>
 
-            {/* Cola bottle — upper right, tilts when holding */}
+            {/*
+              Bottle geometry:
+                container 240px wide, bottle 70px wide at right:10 → left edge x=160, center x=195
+                bottle height 168px, top:18 → pivot (bottom-center) at (195, 186)
+                rotation -60deg → mouth moves to (195-145.5, 186-84) ≈ (49, 102)
+                glass top at y=190, so stream falls ~88px inside the glass
+            */}
             <div style={{
               position: "absolute",
-              right: 12,
-              top: 15,
-              width: 44,
-              height: 105,
-              transform: `rotate(${holding ? -80 : 0}deg)`,
+              right: 10,
+              top: 18,
+              width: 70,
+              height: 168,
+              transform: `rotate(${holding ? -60 : 0}deg)`,
               transformOrigin: "bottom center",
-              transition: "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)",
+              transition: "transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1)",
             }}>
               {/* Cap */}
               <div style={{
                 position: "absolute", top: 0, left: "50%",
                 transform: "translateX(-50%)",
-                width: 14, height: 9,
-                background: "#CC0000",
-                borderRadius: "3px 3px 0 0",
+                width: 22, height: 14,
+                background: "linear-gradient(180deg, #FF1A1A, #AA0000)",
+                borderRadius: "4px 4px 0 0",
               }} />
               {/* Neck */}
               <div style={{
-                position: "absolute", top: 9, left: "50%",
+                position: "absolute", top: 14, left: "50%",
                 transform: "translateX(-50%)",
-                width: 11, height: 20,
-                background: "linear-gradient(90deg, #2A0C04, #4A1808, #2A0C04)",
+                width: 18, height: 32,
+                background: "linear-gradient(90deg, #2A0C04, #5A1E10, #3A1008, #2A0C04)",
               }} />
               {/* Shoulder */}
               <div style={{
-                position: "absolute", top: 29, left: "50%",
+                position: "absolute", top: 46, left: "50%",
                 transform: "translateX(-50%)",
-                width: 36, height: 13,
+                width: 60, height: 20,
                 background: "#3A1208",
-                clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)",
+                clipPath: "polygon(18% 0%, 82% 0%, 100% 100%, 0% 100%)",
               }} />
               {/* Body */}
               <div style={{
-                position: "absolute", top: 42, left: "50%",
+                position: "absolute", top: 66, left: "50%",
                 transform: "translateX(-50%)",
-                width: 40, height: 55,
-                background: "linear-gradient(135deg, #6B2A10 0%, #3A1008 55%, #1A0804 100%)",
-                borderRadius: "3px 3px 8px 8px",
-                border: "1px solid rgba(255,255,255,0.08)",
+                width: 64, height: 88,
+                background: "linear-gradient(135deg, #7C3010 0%, #4A1808 45%, #1A0804 100%)",
+                borderRadius: "4px 4px 10px 10px",
+                border: "1px solid rgba(255,255,255,0.09)",
                 overflow: "hidden",
               }}>
                 {/* Label */}
                 <div style={{
                   position: "absolute",
-                  top: "18%", left: "10%", right: "10%", bottom: "18%",
-                  background: "rgba(170, 0, 0, 0.75)",
-                  borderRadius: "2px",
+                  top: "16%", left: "10%", right: "10%", bottom: "16%",
+                  background: "rgba(180, 0, 0, 0.75)",
+                  borderRadius: "3px",
                   display: "flex", alignItems: "center", justifyContent: "center",
+                  flexDirection: "column", gap: 2,
                 }}>
-                  <span style={{ color: "white", fontSize: 7, fontWeight: 900, letterSpacing: 1 }}>COLA</span>
+                  <span style={{ color: "white", fontSize: 11, fontWeight: 900, letterSpacing: 2 }}>COLA</span>
+                  <span style={{ color: "rgba(255,255,255,0.6)", fontSize: 7, letterSpacing: 1 }}>500ml</span>
                 </div>
                 {/* Shine */}
                 <div style={{
@@ -199,22 +208,22 @@ export default function TensionPage() {
               <div style={{
                 position: "absolute", bottom: 0, left: "50%",
                 transform: "translateX(-50%)",
-                width: 40, height: 8,
-                background: "#150603",
-                borderRadius: "0 0 6px 6px",
+                width: 64, height: 14,
+                background: "linear-gradient(180deg, #1A0804, #0A0200)",
+                borderRadius: "0 0 8px 8px",
               }} />
             </div>
 
-            {/* Pour stream — from bottle mouth to glass when holding */}
+            {/* Pour stream */}
             {holding && !exploded && (
               <div style={{
                 position: "absolute",
-                left: 61,
-                top: 102,
-                width: 6,
-                height: 48,
-                background: "linear-gradient(180deg, #7C3010 0%, #3A1008 60%, transparent 100%)",
-                borderRadius: "3px",
+                left: 48,
+                top: 104,
+                width: 7,
+                height: 86,
+                background: "linear-gradient(180deg, #8C3818 0%, #4A1808 50%, transparent 100%)",
+                borderRadius: "4px",
                 animation: "streamWiggle 0.14s ease-in-out infinite",
                 transformOrigin: "top center",
               }} />
@@ -234,8 +243,8 @@ export default function TensionPage() {
               )}
             </div>
 
-            {/* Mug handle + glass body */}
-            <div style={{ position: "absolute", bottom: 0, left: 20, width: 160 }}>
+            {/* Mug handle + glass — centered in 240px container */}
+            <div style={{ position: "absolute", bottom: 0, left: 40, width: 160 }}>
               {/* Handle */}
               <div style={{
                 position: "absolute",
@@ -256,7 +265,7 @@ export default function TensionPage() {
                 background: "rgba(255,255,255,0.03)",
                 boxShadow: "inset -10px 0 20px rgba(0,0,0,0.25)",
               }}>
-                {/* Cola liquid with bubbles inside */}
+                {/* Cola liquid */}
                 <div style={{
                   position: "absolute",
                   bottom: 0, left: 0, right: 0,
@@ -265,7 +274,7 @@ export default function TensionPage() {
                   transition: holding ? "none" : "height 0.15s ease-out",
                   overflow: "hidden",
                 }}>
-                  {/* Rising bubbles — visible from first pour */}
+                  {/* Rising bubbles inside liquid */}
                   {fillDisplay > 0.01 && BUBBLES.map(([lp, dur, delay, sz], i) => (
                     <div key={i} style={{
                       position: "absolute",
@@ -280,14 +289,14 @@ export default function TensionPage() {
                   ))}
                 </div>
 
-                {/* Foam */}
-                {foamPct > 0 && (
+                {/* Foam — visible from first pour, grows with fill */}
+                {foamHeight > 0 && (
                   <div style={{
                     position: "absolute",
                     bottom: `${fillDisplay * 100}%`,
                     left: 0, right: 0,
-                    height: `${Math.round(foamPct * 28)}px`,
-                    background: "linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.5) 100%)",
+                    height: `${foamHeight}px`,
+                    background: "linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.5) 100%)",
                     borderRadius: "3px 3px 0 0",
                     transition: holding ? "none" : "bottom 0.15s ease-out, height 0.15s ease-out",
                   }} />
