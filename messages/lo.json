@@ -49,7 +49,13 @@
     "back": "ກັບ",
     "about": "ກ່ຽວກັບ",
     "terms": "ເງື່ອນໄຂ",
-    "privacy": "ຄວາມເປັນສ່ວນຕົວ"
+    "privacy": "ຄວາມເປັນສ່ວນຕົວ",
+    "startGame": "ເລີ່ມເກມ",
+    "enterNumber": "ໃສ່ຕົວເລກ",
+    "penaltyCountQ": "ໂທດຈັກອັນ?",
+    "penaltyRange": "ໃສ່ 1–5",
+    "playerCountQ": "ຈັກຄົນ?",
+    "playerRange": "ໃສ່ {min}–{max}"
   },
   "About": {
     "title": "ກ່ຽວກັບ Party Game",
@@ -140,5 +146,33 @@
     "penaltyBody": "ຜູ້ຫຼິ້ນທີ່ເຮັດໃຫ້ຈອກລົ້ນຈະໄດ້ຮັບໂທດ ເນື່ອງຈາກແຕ່ລະຄົນຕື່ມໃນຈອກດຽວກັນ ຍິ່ງໄປທ້າຍຍິ່ງອັນຕະລາຍ",
     "tipHeading": "ຈຸດສຳຄັນ",
     "tipBody": "ຈຸດລົ້ນຖືກສຸ່ມທຸກເກມ ອາດເບິ່ງເກືອບເຕັມແຕ່ຍັງປອດໄພ — ຫຼືອາດລົ້ນໄວກວ່າທີ່ຄາດ ບໍ່ມີໃຜຮູ້!"
+  },
+  "SharkGame": {
+    "hint": "ໂດນແຂ້ວເຫືອຍໂດນໂທດ!"
+  },
+  "BombGame": {
+    "touchToStart": "ແຕະໜ້າຈໍເພື່ອເລີ່ມ!",
+    "passInstruction": "ແຕະສົ່ງໃຫ້ຄົນຂ້າງໆ!"
+  },
+  "TouchGame": {
+    "placeFingers": "ວາງ 2 ນິ້ວຂຶ້ນໄປໃສ່ໜ້າຈໍ",
+    "countdown": "ກ່ອນປະກາດຜົນ...",
+    "dontLift": "ຢ່າເອົານິ້ວອອກ!",
+    "results": "ປະກາດຜົນ!",
+    "playerCount": "{count} ຄົນ"
+  },
+  "CardGame": {
+    "remember": "ຈຳໃຫ້ດີ!",
+    "shuffling": "ກຳລັງສັບ...",
+    "pick": "ເລືອກເລີຍ!",
+    "rememberPos": "ຈຳຕຳແໜ່ງກະໂຫຼກ!",
+    "avoidSkull": "ຫຼີກລ່ຽງກະໂຫຼກ!"
+  },
+  "TensionGame": {
+    "explosion": "ລົ້ນແລ້ວ! ໂດນໂທດ!",
+    "pouring": "🥤 ກຳລັງຖ່າຍ...",
+    "instruction": "ກົດຄ້າງເພື່ອຕື່ມໂຄລ່າ\nປ່ອຍກ່ອນລົ້ນ!",
+    "holdButton": "🥤 ກຳລັງຖ່າຍ!",
+    "pourButton": "ກົດຄ້າງເພື່ອຖ່າຍ"
   }
 }

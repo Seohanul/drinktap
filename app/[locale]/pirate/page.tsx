@@ -13,6 +13,7 @@ function pickPenaltyHole() {
 
 export default function PiratePage() {
   const t = useTranslations("Lobby");
+  const tc = useTranslations("Common");
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
@@ -64,7 +65,7 @@ export default function PiratePage() {
             onClick={() => router.push(`/${locale}/lobby`)}
             className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
           >
-            ‹ 뒤로
+            ‹ {tc("back")}
           </button>
           <h1 className="text-xl font-black text-white">{t("pirate.name")}</h1>
           <div className="w-16" />

@@ -23,6 +23,8 @@ const BUBBLES = [
 export default function TensionPage() {
   const ht = useTranslations("TensionHowTo");
   const t = useTranslations("Lobby");
+  const tc = useTranslations("Common");
+  const tg = useTranslations("TensionGame");
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
@@ -123,7 +125,7 @@ export default function TensionPage() {
             onClick={() => router.push(`/${locale}/lobby`)}
             className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
           >
-            ‹ 뒤로
+            ‹ {tc("back")}
           </button>
           <h1 className="text-xl font-black text-white">🥤 {t("tension.name")}</h1>
           <div className="w-16" />
@@ -324,11 +326,11 @@ export default function TensionPage() {
           {exploded ? (
             <div className="text-center">
               <div className="text-7xl mb-3">💥</div>
-              <p className="text-white font-black text-3xl tracking-tight">대폭발! 당첨!</p>
+              <p className="text-white font-black text-3xl tracking-tight">{tg("explosion")}</p>
             </div>
           ) : (
             <p className="text-white/40 text-sm text-center leading-relaxed whitespace-pre-line">
-              {holding ? "🥤 따르는 중..." : "꾹 누르면 콜라가 채워집니다\n넘치기 전에 떼세요!"}
+              {holding ? tg("pouring") : tg("instruction")}
             </p>
           )}
         </div>
@@ -364,7 +366,7 @@ export default function TensionPage() {
                 transition: "background 0.1s, border 0.1s",
               }}
             >
-              {holding ? "🥤 따르는 중!" : "꾹 눌러서 따르기"}
+              {holding ? tg("holdButton") : tg("pourButton")}
             </button>
           </div>
         )}

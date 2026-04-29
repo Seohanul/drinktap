@@ -49,7 +49,13 @@
     "back": "Quay lại",
     "about": "Giới thiệu",
     "terms": "Điều khoản",
-    "privacy": "Bảo mật"
+    "privacy": "Bảo mật",
+    "startGame": "Bắt đầu",
+    "enterNumber": "Nhập số",
+    "penaltyCountQ": "Bao nhiêu hình phạt?",
+    "penaltyRange": "Nhập từ 1 đến 5",
+    "playerCountQ": "Mấy người chơi?",
+    "playerRange": "Nhập từ {min} đến {max}"
   },
   "About": {
     "title": "Giới thiệu Party Game",
@@ -140,5 +146,33 @@
     "penaltyBody": "Người làm ly tràn sẽ nhận hình phạt. Vì mỗi người cộng vào cùng một ly, càng về sau càng nguy hiểm.",
     "tipHeading": "Điều quan trọng",
     "tipBody": "Điểm tràn được ngẫu nhiên hóa mỗi trò chơi. Có thể trông gần đầy mà vẫn an toàn — hoặc tràn sớm hơn dự kiến. Không ai biết trước!"
+  },
+  "SharkGame": {
+    "hint": "Chạm răng sâu là bị phạt!"
+  },
+  "BombGame": {
+    "touchToStart": "Chạm màn hình để bắt đầu!",
+    "passInstruction": "Chạm để chuyền cho người kế tiếp!"
+  },
+  "TouchGame": {
+    "placeFingers": "Đặt 2 ngón tay trở lên lên màn hình",
+    "countdown": "Trước khi công bố kết quả...",
+    "dontLift": "Đừng nhấc ngón tay!",
+    "results": "Kết quả!",
+    "playerCount": "{count} người"
+  },
+  "CardGame": {
+    "remember": "Hãy nhớ kỹ!",
+    "shuffling": "Đang xáo...",
+    "pick": "Chọn đi!",
+    "rememberPos": "Ghi nhớ vị trí đầu lâu!",
+    "avoidSkull": "Tránh đầu lâu!"
+  },
+  "TensionGame": {
+    "explosion": "Tràn rồi! Bị phạt!",
+    "pouring": "🥤 Đang đổ...",
+    "instruction": "Giữ để đổ đầy cola\nThả trước khi tràn!",
+    "holdButton": "🥤 Đang đổ!",
+    "pourButton": "Giữ để đổ"
   }
 }

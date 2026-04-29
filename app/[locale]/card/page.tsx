@@ -14,6 +14,8 @@ type CardFace = "skull" | "diamond";
 type Transform = { tx: number; ty: number; rot: number; instant: boolean };
 
 function CardSetup({ onStart, onBack }: { onStart: (n: number) => void; onBack: () => void }) {
+  const tc = useTranslations("Common");
+  const tl = useTranslations("Lobby");
   const [value, setValue] = useState("");
   const parsed = parseInt(value, 10);
   const valid = !isNaN(parsed) && parsed >= MIN_PLAYERS && parsed <= MAX_PLAYERS;
@@ -22,14 +24,14 @@ function CardSetup({ onStart, onBack }: { onStart: (n: number) => void; onBack: 
     <div className="min-h-screen flex flex-col bg-black">
       <div className="flex items-center px-4 py-4">
         <button onClick={onBack} className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors">
-          ‹ 뒤로
+          ‹ {tc("back")}
         </button>
       </div>
       <div className="flex-1 flex flex-col items-center justify-center gap-8 px-6">
         <div className="text-center">
           <div className="text-6xl mb-4">💎</div>
-          <h1 className="text-2xl font-black text-white mb-2">저주받은 다이아</h1>
-          <p className="text-white/50 text-sm">몇 명이서 할까요?</p>
+          <h1 className="text-2xl font-black text-white mb-2">{tl("card.name")}</h1>
+          <p className="text-white/50 text-sm">{tc("playerCountQ")}</p>
         </div>
         <div className="w-full max-w-xs flex flex-col items-center gap-4">
           <input
@@ -41,18 +43,18 @@ function CardSetup({ onStart, onBack }: { onStart: (n: number) => void; onBack: 
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && valid && onStart(parsed)}
-            placeholder="숫자 입력"
+            placeholder={tc("enterNumber")}
             className="w-full text-center text-4xl font-black bg-white/10 text-white rounded-2xl py-5 px-4 border-2 border-white/20 focus:border-white/60 outline-none placeholder:text-white/20"
           />
           {value !== "" && !valid && (
-            <p className="text-red-400 text-sm">{MIN_PLAYERS} ~ {MAX_PLAYERS} 사이로 입력해주세요</p>
+            <p className="text-red-400 text-sm">{tc("playerRange", { min: MIN_PLAYERS, max: MAX_PLAYERS })}</p>
           )}
           <button
             onClick={() => valid && onStart(parsed)}
             disabled={!valid}
             className="w-full py-4 rounded-2xl font-black text-xl transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed bg-indigo-500 text-white"
           >
-            게임 시작
+            {tc("startGame")}
           </button>
         </div>
       </div>
@@ -68,6 +70,8 @@ const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
 export default function CardPage() {
   const ht = useTranslations("CardHowTo");
+  const tc = useTranslations("Common");
+  const tg = useTranslations("CardGame");
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
@@ -243,12 +247,12 @@ export default function CardPage() {
             onClick={() => setPhase("setup")}
             className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
           >
-            ‹ 뒤로
+            ‹ {tc("back")}
           </button>
           <h1 className="text-xl font-black text-white">
-            {phase === "preview" && "잘 기억해!"}
-            {phase === "shuffle" && "섞는 중..."}
-            {phase === "playing" && "뽑아봐!"}
+            {phase === "preview" && tg("remember")}
+            {phase === "shuffle" && tg("shuffling")}
+            {phase === "playing" && tg("pick")}
           </h1>
           <div className="w-16" />
         </div>
@@ -324,8 +328,8 @@ export default function CardPage() {
         </div>
 
         <div className="px-4 pt-2 text-center text-white/30 text-xs">
-          {phase === "preview" && "해골 다이아 위치를 기억하세요!"}
-          {phase === "playing" && "해골 다이아를 피하세요!"}
+          {phase === "preview" && tg("rememberPos")}
+          {phase === "playing" && tg("avoidSkull")}
         </div>
         <HowToPlay title={ht("title")}>
           <p><span className="text-white/70 font-semibold">{ht("prepHeading")}</span><br />{ht("prepBody")}</p>

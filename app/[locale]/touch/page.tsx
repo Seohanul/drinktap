@@ -16,6 +16,8 @@ const COUNTDOWN_DURATION = 3; // seconds before picking a loser
 
 export default function TouchRoulettePage() {
   const t = useTranslations("Lobby");
+  const tc = useTranslations("Common");
+  const tg = useTranslations("TouchGame");
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
@@ -130,7 +132,7 @@ export default function TouchRoulettePage() {
             }}
             className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
           >
-            ‹ 뒤로
+            ‹ {tc("back")}
           </button>
           <h1 className="text-xl font-black text-white">{t("touch.name")}</h1>
           <div className="w-16" />
@@ -144,21 +146,21 @@ export default function TouchRoulettePage() {
               <p className="text-white font-bold text-xl">
                 {t("touch.description")}
               </p>
-              <p className="text-white/50 text-sm mt-2">2명 이상 손가락을 올려주세요</p>
+              <p className="text-white/50 text-sm mt-2">{tg("placeFingers")}</p>
             </div>
           )}
           {phase === "countdown" && (
             <div className="text-center">
-              <p className="text-white/60 text-lg font-semibold mb-2">결과 발표까지...</p>
+              <p className="text-white/60 text-lg font-semibold mb-2">{tg("countdown")}</p>
               <span className="text-9xl font-black text-white animate-pulse">
                 {countdown}
               </span>
-              <p className="text-white/50 text-sm mt-2">손가락을 떼지 마세요!</p>
+              <p className="text-white/50 text-sm mt-2">{tg("dontLift")}</p>
             </div>
           )}
           {phase === "result" && touches.length > 0 && (
             <div className="text-center">
-              <p className="text-white font-black text-2xl">결과 발표!</p>
+              <p className="text-white font-black text-2xl">{tg("results")}</p>
             </div>
           )}
         </div>
@@ -188,7 +190,7 @@ export default function TouchRoulettePage() {
         {/* Player count badge */}
         {touches.length > 0 && (
           <div className="absolute top-20 right-4 bg-white/10 rounded-full px-3 py-1 text-white text-sm font-bold z-10 pointer-events-none">
-            {touches.length}명
+            {tg("playerCount", { count: touches.length })}
           </div>
         )}
       </div>

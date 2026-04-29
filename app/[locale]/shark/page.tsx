@@ -52,6 +52,8 @@ function SetupScreen({ onStart }: { onStart: (count: number) => void }) {
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
+  const tc = useTranslations("Common");
+  const tl = useTranslations("Lobby");
   const [value, setValue] = useState("");
 
   const parsed = parseInt(value, 10);
@@ -68,15 +70,15 @@ function SetupScreen({ onStart }: { onStart: (count: number) => void }) {
           onClick={() => router.push(`/${locale}/lobby`)}
           className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
         >
-          ‹ 뒤로
+          ‹ {tc("back")}
         </button>
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center gap-8 px-6">
         <div className="text-center">
           <div className="text-6xl mb-4">🦈</div>
-          <h1 className="text-2xl font-black text-white mb-2">상어 이빨</h1>
-          <p className="text-white/50 text-sm">벌칙 몇 개로 할까요?</p>
+          <h1 className="text-2xl font-black text-white mb-2">{tl("shark.name")}</h1>
+          <p className="text-white/50 text-sm">{tc("penaltyCountQ")}</p>
         </div>
 
         <div className="w-full max-w-xs flex flex-col items-center gap-4">
@@ -89,18 +91,18 @@ function SetupScreen({ onStart }: { onStart: (count: number) => void }) {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-            placeholder="숫자 입력"
+            placeholder={tc("enterNumber")}
             className="w-full text-center text-4xl font-black bg-white/10 text-white rounded-2xl py-5 px-4 border-2 border-white/20 focus:border-white/60 outline-none placeholder:text-white/20"
           />
           {value !== "" && !valid && (
-            <p className="text-red-400 text-sm">1 ~ 5 사이로 입력해주세요</p>
+            <p className="text-red-400 text-sm">{tc("penaltyRange")}</p>
           )}
           <button
             onClick={handleSubmit}
             disabled={!valid}
             className="w-full py-4 rounded-2xl font-black text-xl transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed bg-blue-500 text-white"
           >
-            게임 시작
+            {tc("startGame")}
           </button>
         </div>
       </div>
@@ -110,6 +112,9 @@ function SetupScreen({ onStart }: { onStart: (count: number) => void }) {
 
 export default function SharkPage() {
   const ht = useTranslations("SharkHowTo");
+  const tc = useTranslations("Common");
+  const tl = useTranslations("Lobby");
+  const tg = useTranslations("SharkGame");
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
@@ -189,9 +194,9 @@ export default function SharkPage() {
             onClick={backToSetup}
             className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
           >
-            ‹ 뒤로
+            ‹ {tc("back")}
           </button>
-          <h1 className="text-xl font-black text-white">🦈 상어 이빨</h1>
+          <h1 className="text-xl font-black text-white">🦈 {tl("shark.name")}</h1>
           <span className="text-white/50 text-sm w-16 text-right">
             {pushedCount}/{TOTAL_TEETH - penaltyCount}
           </span>
@@ -272,7 +277,7 @@ export default function SharkPage() {
         <div className="px-4 pb-6 pt-3">
           <div className="max-w-sm mx-auto">
             <p className="text-center text-white/40 text-xs mb-2">
-              충치 이빨을 누르면 벌칙!
+              {tg("hint")}
             </p>
             <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
               <div

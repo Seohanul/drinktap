@@ -49,7 +49,13 @@
     "back": "뒤로",
     "about": "소개",
     "terms": "이용약관",
-    "privacy": "개인정보처리방침"
+    "privacy": "개인정보처리방침",
+    "startGame": "게임 시작",
+    "enterNumber": "숫자 입력",
+    "penaltyCountQ": "벌칙 몇 개로 할까요?",
+    "penaltyRange": "1 ~ 5 사이로 입력해주세요",
+    "playerCountQ": "몇 명이서 할까요?",
+    "playerRange": "{min} ~ {max} 사이로 입력해주세요"
   },
   "About": {
     "title": "파티 게임 소개",
@@ -140,5 +146,33 @@
     "penaltyBody": "컵이 넘치는 순간 그 플레이어가 벌칙을 받습니다. 컵은 이전 플레이어가 채운 상태에서 이어지므로, 뒤로 갈수록 더 위험합니다.",
     "tipHeading": "핵심",
     "tipBody": "넘치는 시점은 매 게임마다 무작위로 정해집니다. 거의 다 찼다고 생각해도 아직 안 넘칠 수 있고, 생각보다 일찍 넘칠 수도 있습니다. 아무도 모릅니다!"
+  },
+  "SharkGame": {
+    "hint": "충치 이빨을 누르면 벌칙!"
+  },
+  "BombGame": {
+    "touchToStart": "화면을 터치해서 시작!",
+    "passInstruction": "터치해서 옆 사람에게 넘겨라!"
+  },
+  "TouchGame": {
+    "placeFingers": "2명 이상 손가락을 올려주세요",
+    "countdown": "결과 발표까지...",
+    "dontLift": "손가락을 떼지 마세요!",
+    "results": "결과 발표!",
+    "playerCount": "{count}명"
+  },
+  "CardGame": {
+    "remember": "잘 기억해!",
+    "shuffling": "섞는 중...",
+    "pick": "뽑아봐!",
+    "rememberPos": "해골 다이아 위치를 기억하세요!",
+    "avoidSkull": "해골 다이아를 피하세요!"
+  },
+  "TensionGame": {
+    "explosion": "대폭발! 당첨!",
+    "pouring": "🥤 따르는 중...",
+    "instruction": "꾹 누르면 콜라가 채워집니다\n넘치기 전에 떼세요!",
+    "holdButton": "🥤 따르는 중!",
+    "pourButton": "꾹 눌러서 따르기"
   }
 }

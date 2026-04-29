@@ -47,6 +47,7 @@ function SetupScreen({ onStart }: { onStart: (count: number) => void }) {
   const params = useParams();
   const locale = params.locale as string;
   const t = useTranslations("Lobby");
+  const tc = useTranslations("Common");
   const [value, setValue] = useState("");
 
   const parsed = parseInt(value, 10);
@@ -63,7 +64,7 @@ function SetupScreen({ onStart }: { onStart: (count: number) => void }) {
           onClick={() => router.push(`/${locale}/lobby`)}
           className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
         >
-          ‹ 뒤로
+          ‹ {tc("back")}
         </button>
       </div>
 
@@ -71,7 +72,7 @@ function SetupScreen({ onStart }: { onStart: (count: number) => void }) {
         <div className="text-center">
           <div className="text-6xl mb-4">🐊</div>
           <h1 className="text-2xl font-black text-white mb-2">{t("alligator.name")}</h1>
-          <p className="text-white/50 text-sm">벌칙 몇 개로 할까요?</p>
+          <p className="text-white/50 text-sm">{tc("penaltyCountQ")}</p>
         </div>
 
         <div className="w-full max-w-xs flex flex-col items-center gap-4">
@@ -84,18 +85,18 @@ function SetupScreen({ onStart }: { onStart: (count: number) => void }) {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-            placeholder="숫자 입력"
+            placeholder={tc("enterNumber")}
             className="w-full text-center text-4xl font-black bg-white/10 text-white rounded-2xl py-5 px-4 border-2 border-white/20 focus:border-white/60 outline-none placeholder:text-white/20"
           />
           {value !== "" && !valid && (
-            <p className="text-red-400 text-sm">1 ~ 5 사이로 입력해주세요</p>
+            <p className="text-red-400 text-sm">{tc("penaltyRange")}</p>
           )}
           <button
             onClick={handleSubmit}
             disabled={!valid}
             className="w-full py-4 rounded-2xl font-black text-xl transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed bg-emerald-500 text-white"
           >
-            게임 시작
+            {tc("startGame")}
           </button>
         </div>
       </div>
@@ -105,6 +106,7 @@ function SetupScreen({ onStart }: { onStart: (count: number) => void }) {
 
 export default function AlligatorPage() {
   const t = useTranslations("Lobby");
+  const tc = useTranslations("Common");
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
@@ -185,7 +187,7 @@ export default function AlligatorPage() {
             onClick={backToSetup}
             className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
           >
-            ‹ 뒤로
+            ‹ {tc("back")}
           </button>
           <h1 className="text-xl font-black text-white">{t("alligator.name")}</h1>
           <span className="text-white/50 text-sm w-16 text-right">

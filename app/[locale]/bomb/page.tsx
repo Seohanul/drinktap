@@ -11,6 +11,8 @@ function randomTimer() {
 
 export default function BombPage() {
   const t = useTranslations("Lobby");
+  const tc = useTranslations("Common");
+  const tg = useTranslations("BombGame");
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
@@ -92,7 +94,7 @@ export default function BombPage() {
             }}
             className="text-white/60 hover:text-white text-sm px-3 py-2 rounded-lg hover:bg-white/10 transition-colors"
           >
-            ‹ 뒤로
+            ‹ {tc("back")}
           </button>
           <h1 className="text-xl font-black text-white">{t("bomb.name")}</h1>
           <div className="w-16" />
@@ -112,7 +114,7 @@ export default function BombPage() {
           )}
           {!started && (
             <p className="text-white/60 text-lg font-semibold text-center">
-              화면을 터치해서 시작!
+              {tg("touchToStart")}
             </p>
           )}
         </div>
@@ -130,7 +132,7 @@ export default function BombPage() {
           </span>
           {started && !exploded && (
             <p className="text-white/70 text-base font-medium text-center pointer-events-none">
-              터치해서 옆 사람에게 넘겨라!
+              {tg("passInstruction")}
             </p>
           )}
           {!started && (
