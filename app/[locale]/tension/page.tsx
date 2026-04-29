@@ -133,23 +133,23 @@ export default function TensionPage() {
 
         <div className="flex-1 flex flex-col items-center justify-center gap-8 select-none px-6">
 
-          {/* Bottle + glass scene — 240px wide, 420px tall */}
-          <div style={{ position: "relative", width: 240, height: 420 }}>
+          {/* Bottle + glass scene — 300px wide, 420px tall */}
+          <div style={{ position: "relative", width: 300, height: 420 }}>
 
             {/*
-              Bottle geometry:
-                bottle center x=203 (left:168), pivot (bottom-center) at (203, 188)
-                idle +15deg → mouth leans right (resting)
-                hold -35deg → mouth at (203-96.4, 188-137.6) ≈ (107, 50)
-                glass center x≈110, glass top y≈190, stream falls ~140px into center
+              Bottle geometry (300px wide scene):
+                bottle center x=270 (left:235), pivot (bottom-center) at (270, 188)
+                idle +10deg → mouth just right of scene (resting upright)
+                hold -75deg (15° from horizontal) → mouth at (270-162, 188-43) ≈ (108, 145)
+                glass center x≈110, glass top y≈190, stream falls ~45px into center
             */}
             <div style={{
               position: "absolute",
-              left: 168,
+              left: 235,
               top: 20,
               width: 70,
               height: 168,
-              transform: `rotate(${holding ? -35 : 15}deg)`,
+              transform: `rotate(${holding ? -75 : 10}deg)`,
               transformOrigin: "bottom center",
               transition: "transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1)",
             }}>
@@ -220,10 +220,10 @@ export default function TensionPage() {
             {holding && !exploded && (
               <div style={{
                 position: "absolute",
-                left: 103,
-                top: 53,
+                left: 105,
+                top: 145,
                 width: 7,
-                height: 137,
+                height: 45,
                 background: "linear-gradient(180deg, #8C3818 0%, #4A1808 50%, transparent 100%)",
                 borderRadius: "4px",
                 animation: "streamWiggle 0.14s ease-in-out infinite",
